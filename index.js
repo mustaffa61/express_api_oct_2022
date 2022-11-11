@@ -2,12 +2,14 @@
 let expressRef = require('express')
 let mongoose = require('mongoose')
 let gmModel = require('./goodmorning_model')
+let cors=require("cors")
 
 let PORT  = 1234
 
 //use expressRef to create express app
 let app = expressRef()
 app.use(expressRef.json())
+app.use(cors())
 
 //connect to mngodb in the cloud
 let connectionString = "mongodb+srv://admin:password230361@clustermus.x2u8hnf.mongodb.net/thoughts"
