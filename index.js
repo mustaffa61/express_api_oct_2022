@@ -67,6 +67,47 @@ app.get("/goodmorning/all", (request, response)=>{
 
 })
 
+// //api to accept incoming requestbody 
+// app.post("/goodmorning/add", (request, response)=>{
+//     console.log("POSt API request received....")
+//     console.log(request.body)
+
+//     response.json({
+//         message:"POST request received",
+//         requestBody:request.body
+//     })
+// })
+
+//api to accept incoming requestbody 
+app.post("/goodmorning/add", (request, response) => {
+    console.log("POSt API request received....")
+    console.log(request.body)
+
+    let newGm = new gmModel()
+    console.log("Log newGm (before intialization)")
+    console.log(newGm)
+
+    newGm.message = request.body.message
+    newGm.author = request.body.author
+    newGm.like = request.body.like
+    console.log("Log newGm (after intialization)");
+    console.log(newGm)
+
+    //save newGm to database
+    newGm.save((error) => {
+        if (error) {
+            response.json(error)
+        } else {
+            response.json({
+                message: "Add is success!",
+                added: newGm
+            })
+        }
+    })
+
+
+
+})
 
 //expose the express app to PORT 1234
 app.listen(PORT, ()=>{
